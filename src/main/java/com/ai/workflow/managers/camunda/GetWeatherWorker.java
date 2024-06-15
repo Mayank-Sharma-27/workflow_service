@@ -1,5 +1,6 @@
 package com.ai.workflow.managers.camunda;
 
+import com.ai.workflow.WorkerResponseTranslationUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import lombok.RequiredArgsConstructor;
@@ -30,28 +31,11 @@ public class GetWeatherWorker {
         String response = restTemplate.getForObject(url, String.class);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, Object> map = mapper.readValue(response, Map.class);
-            Map<String, Object> productMap = (Map<String, Object>) map.get("product");
-
-            // Extract the needed data
-            String ingredientsText = (String) productMap.get("ingredients_text");
-            List ingredientsOriginalTags = (List) productMap.get("ingredients_original_tags");
-
-            // Log the extracted data
-            log.info("Ingredients Text: " + ingredientsText);
-            log.info("Ingredients Original Tags: " + ingredientsOriginalTags);
-
-            // Prepare the variables to complete the job
-            Map<String, Object> variables = new HashMap<>();
-            variables.put("ingredients_text", ingredientsText);
-            variables.put("ingredients_original_tags", ingredientsOriginalTags);
-
+            Map<String, Object> variables = WorkerResponseTranslationUtils.getWorkerResponse(response);
             client.newCompleteCommand(job.getKey())
                     .variables(variables)
                     .send()
                     .join();
-
             log.info("Job completed successfully with variables: " + variables);
 
         } catch (Exception e) {
