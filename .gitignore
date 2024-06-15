@@ -29,6 +29,7 @@ workflow_service/target/
 ../.idea/
 *.iml
 *.iws
+/target/
 
 # Mac OS X files
 .DS_Store
