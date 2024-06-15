@@ -30,6 +30,7 @@ workflow_service/target/
 *.iml
 *.iws
 /target/
+.idea
 
 # Mac OS X files
 .DS_Store
