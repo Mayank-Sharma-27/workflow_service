@@ -163,8 +163,15 @@ Run Conductor
 Call the endpoint  /retrieve-food-data
 
 To Test for Camunda set 
+
+```
 Line 21 workFlowsRepository.save(new WorkFlows("retrieve-food-data", "Camunda")); Set this to conductor to test condutor
 in WorkFlowExecutionFactory
+```
 
-If Camunda fails just try restarting it and call the endpoint using postman
-![Screenshot 2024-06-15 at 11.34.31 AM.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fbz%2Fv4dmzj354f541nlnv7sf1jn80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_azxI4k%2FScreenshot%202024-06-15%20at%2011.34.31%E2%80%AFAM.png)
+If Camunda fails just try restarting it and call the endpoint using postman.
+
+
+```
+The server.port=9090 is set in application-local.properties this means the endpoint of the spring boot application 
+```
