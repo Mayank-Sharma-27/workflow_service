@@ -19,7 +19,7 @@ public class WorkflowExecutionFactory {
     private final WorkFlowsRepository workFlowsRepository;
 
     public WorkflowExecutionInterface getWorkflowExecutor(String apiEndPoint) {
-        workFlowsRepository.save(new WorkFlows("retrieve-food-data", "Conductor"));
+        workFlowsRepository.save(new WorkFlows("retrieve-food-data", "Camunda"));
 
         WorkFlows workflow = workflowToApiService.getWorkflowFromApi(apiEndPoint);
 
